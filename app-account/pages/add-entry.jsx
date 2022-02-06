@@ -1,18 +1,25 @@
 import { Formik } from "formik";
 import Button from "../components/Button";
 import FormField from "../components/FormField";
-import { useContext } from "react/cjs/react.development";
+import { useCallback, useContext } from "react/cjs/react.development";
 import AddEntryContext from "../components/context/Add-entryContext";
 import Header from "../components/Header";
+import Input from "../components/Input";
 
 const Add = () => {
-  const {
-    state: { entries },
+   const {
+    state : { entries },
   } = useContext(AddEntryContext);
+
+
+
 
   const { handleFormSubmit } = useContext(AddEntryContext);
   const { validationSchema } = useContext(AddEntryContext);
 
+const submit = () => {
+  useCallback(Input => handleSubmit(Input),[submit])
+}
   return (
     <div className="place-content-center m-auto relative w-5/6 ">
       <Header name="Add Entry" />

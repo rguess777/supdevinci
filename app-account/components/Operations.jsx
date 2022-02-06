@@ -1,78 +1,69 @@
+import { useContext } from "react";
+import AddEntryContext from "./context/Add-entryContext";
+
 const Operations = () => {
-    const data = [
-      {
-        id: 1,
-        value: 2000,
-        message: "Salaire",
-      },
-      {
-        id: 2,
-        value: -200,
-        message: "Course",
-      },
-      {
-        id: 3,
-        value: -500,
-        message: "Voiture",
-      },
-    ];
+  const {state} = useContext(AddEntryContext); 
+  const data = state;
+  console.log(data);
+
+     
   
-    let result = data.reduce((ab, { value }) => {
-      ab = ab + value;
-      return ab;
-    }, 0);
+    //  const countOut = data.filter((value)=>value<0).reduce((ac, {value} ) => {
+    //     ac + value;
+    //  }, 0);
+
+     const countOut = data.filter((x) => x.value < 0).reduce(
+                      (ac, { value }) => ac + parseInt(value),
+                      0);
   
-    let countOut = data.reduce((ac, { value }) => {
-      ac = ac - (value < 0);
-      return ac;
-    }, 0);
-  
-    let countIn = data.reduce((acc, { value }) => {
-      acc = acc + (value > 0);
-      return acc;
-    }, 0);
+     const countIn = data.filter((x) => x.value > 0).reduce(
+      (ac, { value }) => ac + parseInt(value),
+      0);
+
+     const result = countIn + countOut;
+
     return (
         <div className="">
-          <table className="border-collapse w-full  border border-gray-500 ...">
+          <table className="border-collapse w-full  border border-gray-500 ">
             <thead>
               <tr>
-                <th className="border border-gray-600 ...">out</th>
-                <th className="border border-gray-600 ...">in</th>
+                <th className="border border-gray-600 ">out</th>
+                <th className="border border-gray-600 ">in</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((data) =>
-                data.value > 0 ? (
-                  <tr key={data.id} className="text-right">
-                    <td className="border border-gray-400 ..."></td>
-                    <td className="border border-gray-400 text-green-600 ...">
-                      {data.value}
+               {Object.entries(data).map(([id,{value,message}]) =>
+                value > 0 ? (
+                  <tr key={id} className="text-right">
+                    <td className="border border-gray-400 "></td>
+                    <td className="border border-gray-400 text-green-600">
+                      {value}
                       <br />
-                      <span>{data.message}</span>
+                      <span>{message}</span>
                     </td>
                   </tr>
                 ) : (
-                  <tr key={data.id} className="text-red-600 text-right">
-                    <td className="border border-gray-400  ...">
-                      {data.value}
+                  <tr key={id} className="text-red-600 text-right">
+                    <td className="border border-gray-400  ">
+                      {value}
                       <br />
-                      <span>{data.message}</span>
+                      <span>{message}</span>
                     </td>
-                    <td className="border  border-gray-400 ..."></td>
+                    <td className="border  border-gray-400 "></td>
                   </tr>
                 )
               )}
-    
-              <tr key={data.id} className="text-red-600 text-right">
-                <td className="border border-gray-400 ...">Total : {countOut}</td>
-                <td className="border border-gray-400 ...">Total : {countIn}</td>
-              </tr>
-              <tr key={data.id} className="text-green-600  ">
+     
+               <tr className="text-red-600 text-right">
+                 <td className="border border-gray-400 ">Total : {countOut}</td>
+                <td className="border border-gray-400 ">Total : {countIn}</td> 
+               </tr> 
+               <tr className="text-green-600  ">
                 <div>
                   <span> Result : </span>
                   {result}
-                </div>
-              </tr>
+                </div> 
+              </tr>  
             </tbody>
           </table>
         </div>

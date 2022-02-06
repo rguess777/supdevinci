@@ -8,23 +8,16 @@ const validationSchema = yup.object().shape({
   message: yup.string().required().label("message"),
 });
 
-const initialValues = {
-  entries: {
-    value: "",
-    message: "",
-  },
-};
-
 const savedInitialValue = {
-  savedEntries: [],
+  savedEntries: [{id : 1, value : 200, message: "to"}],
 };
 
 export const AddEntryProvider = (props) => {
-  const [state, setState] = useState(initialValues);
-  const handleFormSubmit = useCallback(async ({ state }) => {
-    setState(state);
+  const [state, setState] = useState(savedInitialValue.savedEntries);
+  const handleFormSubmit = useCallback(( entries ) => {
+    setState((currentState) => currentState.concat(entries));
   }, []);
-
+console.log(state);
   return (
     <AddEntryContext.Provider
       {...props}
