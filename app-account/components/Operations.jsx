@@ -6,12 +6,6 @@ const Operations = () => {
   const data = state;
   console.log(data);
 
-     
-  
-    //  const countOut = data.filter((value)=>value<0).reduce((ac, {value} ) => {
-    //     ac + value;
-    //  }, 0);
-
      const countOut = data.filter((x) => x.value < 0).reduce(
                       (ac, { value }) => ac + parseInt(value),
                       0);
@@ -57,13 +51,19 @@ const Operations = () => {
                <tr className="text-red-600 text-right">
                  <td className="border border-gray-400 ">Total : {countOut}</td>
                 <td className="border border-gray-400 ">Total : {countIn}</td> 
-               </tr> 
-               <tr className="text-green-600  ">
+               </tr> {result<0 ? <tr className="text-red-600  ">
+                <div>
+                  <span> Result : </span>
+                  {result}
+                </div> 
+              </tr>  : <tr className="text-green-600  ">
                 <div>
                   <span> Result : </span>
                   {result}
                 </div> 
               </tr>  
+               }
+               
             </tbody>
           </table>
         </div>
