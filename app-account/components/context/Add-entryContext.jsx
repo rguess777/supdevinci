@@ -3,25 +3,32 @@ import { createContext, useCallback, useState } from "react";
 
 const AddEntryContext = createContext({});
 
+const initialState = 
+  [
+    { value: 10, prenom: "mathieu",nom:"junior",ville:"courbevoie",adresse:"1 rue de la saint valentin" },
+  ];
+
+
 const validationSchema = yup.object().shape({
-  value: yup.number().required().label("value"),
-  message: yup.string().required().label("message"),
+  value: yup.number().label("value"),
+  prenom: yup.string().label("prenom"),
+  nom: yup.string().label("nom"),
+  ville: yup.string().label("ville"),
+  adresse: yup.string().label("adresse"),
+
 });
 
-const savedInitialValue = {
-  savedEntries: [{id : 1, value : 200, message: "to"}],
-};
+
 
 export const AddEntryProvider = (props) => {
-  const [state, setState] = useState(savedInitialValue.savedEntries);
+  const [state, setState] = useState(initialState);
   const handleFormSubmit = useCallback(( entries ) => {
     setState((currentState) => currentState.concat(entries));
   }, []);
-console.log(state);
   return (
     <AddEntryContext.Provider
       {...props}
-      value={{ state, handleFormSubmit, validationSchema, savedInitialValue }}
+      value={{ state, handleFormSubmit, validationSchema }}
     ></AddEntryContext.Provider>
   );
 };

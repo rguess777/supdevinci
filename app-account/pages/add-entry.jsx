@@ -35,11 +35,20 @@ const submit = () => {
               noValidate
               className="flex flex-col gap-4 p-4"
             >
-              <FormField name="value" type="text" placeholder="Votre montant">
-                Montant
+              <FormField name="value" type="text" placeholder="Votre age">
+                Age
               </FormField>
-              <FormField name="message" type="text" placeholder="Votre message">
-                Message
+              <FormField name="message" type="text" placeholder="Votre prenom">
+                Prenom
+              </FormField>
+              <FormField name="nom" type="text" placeholder="Votre nom">
+                Nom
+              </FormField>
+              <FormField name="ville" type="text" placeholder="Votre ville">
+                Ville
+              </FormField>
+              <FormField name="adresse" type="text" placeholder="Votre Adresse">
+                Adresse
               </FormField>
               <Button type="submit" disabled={!isValid || isSubmitting}>
                 Ajouter
