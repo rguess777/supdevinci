@@ -38,7 +38,7 @@ const submit = () => {
               <FormField name="value" type="text" placeholder="Votre age">
                 Age
               </FormField>
-              <FormField name="message" type="text" placeholder="Votre prenom">
+              <FormField name="prenom" type="text" placeholder="Votre prenom">
                 Prenom
               </FormField>
               <FormField name="nom" type="text" placeholder="Votre nom">
